@@ -1,7 +1,15 @@
 ﻿using System;
+
 namespace TechJobsOO
 {
     public class Location
+    {
+        public Location(string value) : base(value)
+        {
+        }
+    }
+}
+    /* public class Location
     {
         public int Id { get; }
         private static int nextId = 1;
@@ -30,5 +38,4 @@ namespace TechJobsOO
         {
             return Value;
         }
-    }
-}
+    } */
