@@ -48,5 +48,24 @@ namespace TechJobsTests
 
             Assert.IsFalse(Equals(obj4_test, obj5_test));
         }
+
+        [TestMethod]
+        public void TestToStringFirstAndLastLines()
+        {
+            Employer ACME = new Employer("ACME");
+            Location Desert = new Location("Desert");
+            PositionType Quality_control = new PositionType("Quality control");
+            CoreCompetency Persistence = new CoreCompetency("Persistence");
+            Job obj6_test = new Job("Product tester", ACME, Desert, Quality_control, Persistence);
+
+            List<string> list1 = obj6_test.ToString().Split("\n").ToList();
+
+            //Should return a string that contains a blank line before the job information.
+            Assert.AreEqual("", list1[0]);
+            //Should return a string that contains a blank line after the job information.
+            Assert.AreEqual("", list1[7]);
+            //Only 8 items in the list
+            Assert.AreEqual(8, list1.Count);
+        }
     }
 }
