@@ -33,5 +33,20 @@ namespace TechJobsTests
             Assert.AreEqual(Quality_control, obj3_test.JobType);
             Assert.AreEqual(Persistence, obj3_test.JobCoreCompetency);
         }
+
+        [TestMethod]
+        public void TestJobsForEquality()
+        {
+            //Two objects are NOT equal if their id values differ, even if all the other fields are identical.
+            Employer ACME = new Employer("ACME");
+            Location Desert = new Location("Desert");
+            PositionType Quality_control = new PositionType("Quality control");
+            CoreCompetency Persistence = new CoreCompetency("Persistence");
+
+            Job obj4_test = new Job("Product tester", ACME, Desert, Quality_control, Persistence);
+            Job obj5_test = new Job("Product tester", ACME, Desert, Quality_control, Persistence);
+
+            Assert.IsFalse(Equals(obj4_test, obj5_test));
+        }
     }
 }
