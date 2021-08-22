@@ -69,5 +69,58 @@ namespace TechJobsTests
             //Only 8 items in the list
             Assert.AreEqual(8, list1.Count);
         }
+
+        [TestMethod]
+        public void TestToStringData()
+        {
+            Employer ACME = new Employer("ACME");
+            Location Desert = new Location("Desert");
+            PositionType Quality_control = new PositionType("Quality control");
+            CoreCompetency Persistence = new CoreCompetency("Persistence");
+
+            //reset nextId to make sure data is not polluted.
+            Job.ResetNextId();
+
+            Job obj7_test = new Job("Product tester", ACME, Desert, Quality_control, Persistence);
+
+            List<string> list1 = obj7_test.ToString().Split("\n").ToList();
+
+            //The string should contain a label for each field, followed by the data stored in that field. Each field should be on its own line.
+            Assert.AreEqual("ID: 1", list1[1]);
+            Assert.AreEqual("Name: Product tester", list1[2]);
+            Assert.AreEqual("Employer: ACME", list1[3]);
+            Assert.AreEqual("Location: Desert", list1[4]);
+            Assert.AreEqual("Position Type: Quality control", list1[5]);
+            Assert.AreEqual("Core Competency: Persistence", list1[6]);
+        }
+
+        [TestMethod]
+        public void TestToStringDataNotAvailable()
+        {
+            Location Desert = new Location("Desert");
+            PositionType Quality_control = new PositionType("Quality control");
+            CoreCompetency Persistence = new CoreCompetency("Persistence");
+
+            Employer Empty = new Employer("");
+            Job obj8_test = new Job("Product tester", Empty, Desert, Quality_control, Persistence);
+
+            List<string> list2 = obj8_test.ToString().Split("\n").ToList();
+
+            //If a field is empty, the method should add, “Data not available” after the label.
+            Assert.AreEqual("Employer: Data not available", list2[3]);
+        }
+
+        [TestMethod]
+        public void TestToStringSetsOnlyId()
+        {
+            Employer Empty = new Employer("");
+            Location empLoc = new Location("");
+            PositionType empPos = new PositionType("");
+            CoreCompetency empComp = new CoreCompetency("");
+            Job obj9_test = new Job("", Empty, empLoc, empPos, empComp);
+
+            //If a Job object ONLY contains data for the id field, the method should return, “OOPS! This job does not seem to exist.”
+            Assert.AreEqual("OOPS! This job does not seem to exist.", obj9_test.ToString());
+        }
     }
 }
