@@ -3,6 +3,14 @@ namespace TechJobsOO
 {
     public class CoreCompetency
     {
+        public CoreCompetency(string value) : base(value)
+        {
+        }
+    }
+}
+    /*
+    public class CoreCompetency
+    {
         private int id;
         private static int nextId = 1;
         private string value;
@@ -36,4 +44,4 @@ namespace TechJobsOO
             return value;
         }
     }
-}
+} */
